@@ -9,3 +9,11 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
   
 RUN pip3 install --upgrade pip  
 RUN pip3 install azureml-defaults  
+
+RUN echo "/usr/lib/rstudio-server/bin/rserver --server-daemonize 0 --www-port 8787" > /entrypoint.sh
+
+# Expose the RStudio port  
+EXPOSE 8787  
+  
+# Set the entrypoint script to start RStudio  
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]  
